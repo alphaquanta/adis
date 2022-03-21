@@ -12,6 +12,8 @@ target 'adis' do
     :hermes_enabled => false
   )
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'adisTests' do
     inherit! :complete
     # Pods for testing

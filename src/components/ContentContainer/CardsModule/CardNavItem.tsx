@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, TouchableHighlight, View ,Text} from 'react-native';
-import { Image } from 'react-native-elements';
-import { PlaceHolder, theme } from '../../Theme/theme';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { PlaceHolder, theme } from '../../../Theme/theme';
 import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 import Tts from 'react-native-tts';
+import { Image } from 'react-native-elements';
 
-export const QuickAccessButton = (props:any) => {
 
-    useEffect(()=> {
-    },[]);
+export const CardItem = (...props:any) => {
+
 
     async function OnClick(...params:any)
     {
@@ -22,10 +21,7 @@ export const QuickAccessButton = (props:any) => {
     }
 
     return(
-        
-        <View
-        style={styles.QuickAccessButton}
-        >
+        <View style={styles.CardItemWrapper}>
         <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
@@ -44,11 +40,22 @@ export const QuickAccessButton = (props:any) => {
         </View>
         </TouchableHighlight>
         </View>
-
     )
 }
 
-const styles = StyleSheet.create({
+
+  const styles = StyleSheet.create({
+    CardItemWrapper:
+    {
+        width:vw(15),
+        height:vw(15) + 20,
+        borderColor:theme.colors?.primary,
+        borderWidth:1,
+        borderRadius:5,
+        marginVertical:25,
+        marginHorizontal:10,
+    
+    },
     QuickAccessButton: {
         height:"25%",
         aspectRatio: .9,
@@ -84,4 +91,3 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
     }
   });
-  
