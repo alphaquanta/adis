@@ -8,7 +8,8 @@ import SystemNavigationBar from "react-native-system-navigation-bar";
 import Orientation from 'react-native-orientation-locker';
 import Tts from 'react-native-tts';
 import { InfoBar } from './components/InfoBar/InfoBar';
-
+import {Provider} from "react-redux"
+import store from "./storage/Store"
 
 export default function App() {
   useEffect(()=> 
@@ -46,6 +47,7 @@ export default function App() {
     SystemNavigationBar.stickyImmersive()
   }
   return (
+    <Provider store = {store}>
     <ThemeProvider theme={theme}>
     <InfoBar/>
     <View style={styles.container}>
@@ -54,6 +56,7 @@ export default function App() {
       <SideBar/>
     </View>
     </ThemeProvider>
+    </Provider>
   );
 }
 

@@ -3,18 +3,25 @@ import { StyleSheet, Text, View } from 'react-native';
 import { theme } from '../../Theme/theme';
 import {format} from 'date-fns'
 import tr from 'date-fns/locale/tr'
+import { useSelector,useDispatch } from 'react-redux';
+import { selectUserData } from '../../storage/Store';
+import { setUserData } from '../../storage/User/UserStorage';
+import { UserData } from '../../storage/User/UserTypes';
 
 export const InfoBar = () => {
     const [dateTime,setDateTime] = useState<Date>(new Date())
+    const userData = useSelector(selectUserData)
+    const setUser = useDispatch()
     useEffect(() => 
     {
+      //GET USER DATA HERE
       setInterval(() => {
         setDateTime(new Date())
       },30000)
     },[])
     return(
       <View style={styles.InfoBarContainer}>
-      <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>İsmail Barış Bozkuş</Text></View>
+      <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{userData.name} {userData.surname}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'EEEE',{locale:tr})}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'HH:MM',{locale:tr})}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'dd/MM/yyyy',{locale:tr})}</Text></View>
