@@ -5,15 +5,15 @@ import { QuickAccessButton } from './QuickAccessButton';
 import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 export const SideBar = (props:any) => {
-
-
+  const baseIndex = props?.side == "left" ? 0 : 3  
+  
     return(
         <View
         style={styles.SideBar}
         >
-        <QuickAccessButton/>
-        <QuickAccessButton/>
-        <QuickAccessButton/>
+        <QuickAccessButton buttonIndex = {baseIndex}/>
+        <QuickAccessButton buttonIndex = {baseIndex+1}/>
+        <QuickAccessButton buttonIndex = {baseIndex+2}/>
         </View>
     )
 }

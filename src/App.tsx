@@ -10,10 +10,12 @@ import Tts from 'react-native-tts';
 import { InfoBar } from './components/InfoBar/InfoBar';
 import {Provider} from "react-redux"
 import store from "./storage/Store"
+import Sound from 'react-native-sound';
 
 export default function App() {
   useEffect(()=> 
   {
+    Sound.setCategory('Playback');
     SystemNavigationBar.stickyImmersive()
     Orientation.lockToLandscape()
     CheckAndSetTTS()
@@ -51,9 +53,9 @@ export default function App() {
     <ThemeProvider theme={theme}>
     <InfoBar/>
     <View style={styles.container}>
-      <SideBar/>
+      <SideBar side ={"left"}/>
       <CardsModule/>
-      <SideBar/>
+      <SideBar side ={"right"}/>
     </View>
     </ThemeProvider>
     </Provider>

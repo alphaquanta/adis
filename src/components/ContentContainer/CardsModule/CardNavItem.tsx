@@ -4,20 +4,37 @@ import { PlaceHolder, theme } from '../../../Theme/theme';
 import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 import Tts from 'react-native-tts';
 import { Image } from 'react-native-elements';
+import { Card } from '../../../storage/Card/CardTypes';
+import { navigateBack, setSelectedCard } from '../../../storage/Card/CardStorage';
+import { useDispatch } from 'react-redux';
 
 
-export const CardItem = (...props:any) => {
+export const CardItem = (props:any) => {
+//export type QuickButtonType = "QUICK_BUTTON_YES"|"QUICK_BUTTON_NO"|"QUICK_BUTTON_BACK"|"QUICK_BUTTON_PAIN"|"QUICK_BUTTON_ALARM"
 
+    const navigateCard = useDispatch()
+    const navigateBack = useDispatch();
 
     async function OnClick(...params:any)
     {
 
+        if((props?.cardData as Card)?.cardType == "CARD_MENU")
+        {
+            Tts.stop();
+            Tts.speak((props?.cardData as Card)?.cardName ?? "Kart")
+            navigateCard(setSelectedCard((props?.cardData as Card)?.cardName))
+            console.log("on click menu")
+        }
     }
 
     async function OnLongPress(...params:any)
     {
+        if((props?.cardData as Card)?.cardType == "QUICK_BUTTON" )
+        {
+            return;
+        }
         Tts.stop();
-        Tts.speak(props?.Data?.TTSText ?? "Kart")
+        Tts.speak((props?.cardData as Card)?.cardName ?? "Kart")
     }
 
     return(
@@ -31,11 +48,11 @@ export const CardItem = (...props:any) => {
         style={styles.QuickButtonContentWrapper}
         >
         <Image
-        source={{uri:PlaceHolder}}
+        source={{uri:(props?.cardData as Card)?.cardData ?? PlaceHolder}}
         style={styles.ButtonImage}
         />
         <View style={styles.QuickButtonLabelContainer}>
-        <Text style={styles.QuickButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>Hızlı Menü Butonu</Text>
+        <Text style={styles.QuickButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{(props?.cardData as Card)?.cardName}</Text>
         </View>
         </View>
         </TouchableHighlight>

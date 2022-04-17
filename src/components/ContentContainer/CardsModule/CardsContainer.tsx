@@ -6,30 +6,29 @@ import tr from 'date-fns/locale/tr'
 import { InfoBar } from '../../InfoBar/InfoBar';
 import { TTS } from '../../TTS/TTSChips';
 import { CardItem } from './CardNavItem';
+import { useSelector } from 'react-redux';
+import { CardDeck } from '../../../storage/Store';
 
 
 export const CardsModule = () => {
-
-
+  const deckData = useSelector(CardDeck)
+  console.log("Card Module call")
+  console.log(deckData.deck.length)
     return(
         <View
         style={styles.MainContainer}
         >
       <TTS/>
       <ScrollView contentContainerStyle = {styles.CardsContainer}>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
-        <CardItem/>
+        {
+          deckData.deck.map(card =>
+            {
+              if(card.cardParrent == deckData.selectedCard)
+              {
+                return <CardItem key = {card.cardUUID} cardData = {card}/>
+              }
+            })
+        }
       </ScrollView>
       </View>
     )
