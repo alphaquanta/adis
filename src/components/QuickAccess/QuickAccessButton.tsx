@@ -49,10 +49,9 @@ export const QuickAccessButton = (props:any) => {
                     dispatchBack(navigateBack())
                     return;
                 case "QUICK_BUTTON_NO":
-                    //play no sound
-                    return;
                 case "QUICK_BUTTON_YES":
-                    //play yes sound
+                    Tts.stop();
+                    Tts.speak((deckData?.deck[bIndex])?.cardName ?? "Kart")
                     return;
                 case "QUICK_BUTTON_PAIN":
                     //switch to pain module
@@ -64,7 +63,7 @@ export const QuickAccessButton = (props:any) => {
     async function OnLongPress(...params:any)
     {
         Tts.stop();
-        Tts.speak(props?.Data?.TTSText ?? "Kart")
+        Tts.speak(props?.Data?.cardName ?? "Kart")
     }
 
     return(

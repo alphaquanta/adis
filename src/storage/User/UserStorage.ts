@@ -5,8 +5,8 @@ const initialUser: UserData =
 {
     isInit: false,
     uuid: "NONE",
-    name: "Not Initilized",
-    surname: "",
+    name: "İsmail Barış",
+    surname: "BOZKUŞ",
     skillLevel: 0,
     emergencyContact: "",
     caretakerUUID: ""

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { theme } from '../../../Theme/theme';
-import {format} from 'date-fns'
-import tr from 'date-fns/locale/tr'
-import { InfoBar } from '../../InfoBar/InfoBar';
 import { TTS } from '../../TTS/TTSChips';
 import { CardItem } from './CardNavItem';
 import { useSelector } from 'react-redux';

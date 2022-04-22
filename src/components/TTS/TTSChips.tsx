@@ -35,45 +35,6 @@ export const TTS = () =>
         <View style={styles.TTSChipsContainer}>
             <ScrollView contentContainerStyle={styles.TTSChipsScrollView}>
             <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-            <TTSChip/>
-
-
-
 
             </ScrollView>
         </View>
@@ -98,22 +59,28 @@ export const TTS = () =>
 
 const TTSChip = () => 
 {
-    const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-    const rand = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus totam vel beatae quae repudiandae magnam labore dolor quaerat! Veritatis odit nemo qui maiores blanditiis magni esse harum, unde expedita quasi sunt officiis quam voluptates illum exercitationem. Reiciendis, earum. Blanditiis inventore possimus dolores assumenda atque officiis nobis? Rerum aspernatur impedit deserunt.`.split(' ')
+    //This requires connection to the redux storage and passing relevant shit to that
+    const rand = `Babam ile görüşmek istiyorum`.split(' ')
     return(
-        <Chip
-        title={`${rand[random(0,rand.length-1)]}`}
-        type='outline'
-        containerStyle={{marginVertical:10,marginHorizontal:5}}
-        icon={{
-            name:"close",
-            type:"font-awesome",
-            size:20,
-            color:colors.primary
-        }}
-        iconRight
-        onPress={() => console.log("CHİP")}
-        />
+        <>{
+            rand.map(item => {
+                return (
+                    <Chip
+                    title={`${item}`}
+                    type='outline'
+                    containerStyle={{marginVertical:10,marginHorizontal:5}}
+                    icon={{
+                        name:"close",
+                        type:"font-awesome",
+                        size:20,
+                        color:colors.primary
+                    }}
+                    iconRight
+                    onPress={() => console.log("CHİP")}
+                    />
+                )
+            })
+        }</>
     )
 }
 
