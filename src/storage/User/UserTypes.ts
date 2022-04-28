@@ -1,5 +1,5 @@
 
-export interface UserData
+export interface UserDataType
 {
     isInit: boolean;
     uuid:string;
@@ -8,4 +8,5 @@ export interface UserData
     skillLevel:number;
     emergencyContact:string;
     caretakerUUID:string;  
+    isTTS:boolean;
 }

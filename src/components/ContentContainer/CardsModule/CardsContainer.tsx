@@ -4,18 +4,18 @@ import { theme } from '../../../Theme/theme';
 import { TTS } from '../../TTS/TTSChips';
 import { CardItem } from './CardNavItem';
 import { useSelector } from 'react-redux';
-import { CardDeck } from '../../../storage/Store';
+import { ApplicationData, CardDeck, UserData } from '../../../storage/Store';
 
 
 export const CardsModule = () => {
   const deckData = useSelector(CardDeck)
-  console.log("Card Module call")
-  console.log(deckData.deck.length)
+  const userState = useSelector(UserData);
+
     return(
         <View
         style={styles.MainContainer}
         >
-      <TTS/>
+      {userState.isTTS ? <TTS/> : <></>}
       <ScrollView contentContainerStyle = {styles.CardsContainer}>
         {
           deckData.deck.map(card =>

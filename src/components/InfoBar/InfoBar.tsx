@@ -4,14 +4,12 @@ import { theme } from '../../Theme/theme';
 import {format} from 'date-fns'
 import tr from 'date-fns/locale/tr'
 import { useSelector,useDispatch } from 'react-redux';
-import { selectUserData } from '../../storage/Store';
-import { setUserData } from '../../storage/User/UserStorage';
-import { UserData } from '../../storage/User/UserTypes';
+import { UserData } from '../../storage/Store';
+
 
 export const InfoBar = () => {
     const [dateTime,setDateTime] = useState<Date>(new Date())
-    const userData = useSelector(selectUserData)
-    const setUser = useDispatch()
+    const userData = useSelector(UserData)
     useEffect(() => 
     {
       //GET USER DATA HERE

@@ -6,14 +6,14 @@ import { Chip, colors, Image } from 'react-native-elements';
 import { color, ScreenHeight } from 'react-native-elements/dist/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearChips, removeChip } from '../../storage/TTSChip/ChipStorage';
-import { chipBucket } from '../../storage/Store';
+import { ChipBucketData } from '../../storage/Store';
 import Tts from 'react-native-tts';
 
 
 export const TTS = () =>
 {
     const dispatch = useDispatch();
-    const chips = useSelector(chipBucket)
+    const chips = useSelector(ChipBucketData)
 
     async function ReadTTS(...params:any[])
     {

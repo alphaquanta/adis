@@ -8,8 +8,8 @@ import SystemNavigationBar from "react-native-system-navigation-bar";
 import Orientation from 'react-native-orientation-locker';
 import Tts from 'react-native-tts';
 import { InfoBar } from './components/InfoBar/InfoBar';
-import {Provider} from "react-redux"
-import store from "./storage/Store"
+import {Provider, useSelector} from "react-redux"
+import store, { ApplicationData, UserData } from "./storage/Store"
 import Sound from 'react-native-sound';
 
 export default function App() {
@@ -54,12 +54,23 @@ export default function App() {
     <InfoBar/>
     <View style={styles.container}>
       <SideBar side ={"left"}/>
-      <CardsModule/>
+      <NavigationContainer/>
       <SideBar side ={"right"}/>
     </View>
     </ThemeProvider>
     </Provider>
   );
+}
+
+const NavigationContainer = () =>
+{
+  const userState = useSelector(UserData);
+  const applicationState = useSelector(ApplicationData);
+  return(
+    <>
+    {applicationState.selectedModule == "CARDS" ? <CardsModule/> : <></>}
+    </>
+  )
 }
 
 const styles = StyleSheet.create({

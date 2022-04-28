@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserData } from "./UserTypes";
+import { UserDataType } from "./UserTypes";
 
-const initialUser: UserData = 
+const initialUser: UserDataType = 
 {
     isInit: false,
     uuid: "NONE",
@@ -9,7 +9,8 @@ const initialUser: UserData =
     surname: "BOZKUŞ",
     skillLevel: 0,
     emergencyContact: "",
-    caretakerUUID: ""
+    caretakerUUID: "",
+    isTTS:true
 } 
 
 export const userDataSlice = createSlice({
@@ -21,7 +22,7 @@ export const userDataSlice = createSlice({
         {
             return {...userData,isInit:action.payload}
         },
-        setUserData:(userData,action:PayloadAction<UserData>) =>
+        setUserData:(userData,action:PayloadAction<UserDataType>) =>
         {
             return {...action.payload,isInit:true}
         }
