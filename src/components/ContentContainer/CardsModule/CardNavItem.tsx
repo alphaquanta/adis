@@ -7,13 +7,13 @@ import { Image } from 'react-native-elements';
 import { Card } from '../../../storage/Card/CardTypes';
 import { navigateBack, setSelectedCard } from '../../../storage/Card/CardStorage';
 import { useDispatch } from 'react-redux';
+import { addChip } from '../../../storage/TTSChip/ChipStorage';
 
 
 export const CardItem = (props:any) => {
 //export type QuickButtonType = "QUICK_BUTTON_YES"|"QUICK_BUTTON_NO"|"QUICK_BUTTON_BACK"|"QUICK_BUTTON_PAIN"|"QUICK_BUTTON_ALARM"
 
-    const navigateCard = useDispatch()
-    const navigateBack = useDispatch();
+    const dispatch = useDispatch()
 
     async function OnClick(...params:any)
     {
@@ -22,19 +22,23 @@ export const CardItem = (props:any) => {
         {
             Tts.stop();
             Tts.speak((props?.cardData as Card)?.cardName ?? "Kart")
-            navigateCard(setSelectedCard((props?.cardData as Card)?.cardName))
-            console.log("on click menu")
+            dispatch(setSelectedCard((props?.cardData as Card)?.cardName))
         }
+        if((props?.cardData as Card)?.cardType == "CARD_ITEM")
+        {
+            Tts.stop();
+            Tts.speak((props?.cardData as Card)?.cardName ?? "Kart")
+        }
+
     }
 
     async function OnLongPress(...params:any)
     {
-        if((props?.cardData as Card)?.cardType == "QUICK_BUTTON" )
+
+        if((props?.cardData as Card)?.cardType == "CARD_ITEM" ||  (props?.cardData as Card)?.cardType == "CARD_MENU")
         {
-            return;
+            dispatch(addChip(props?.cardData?.cardName))
         }
-        Tts.stop();
-        Tts.speak((props?.cardData as Card)?.cardName ?? "Kart")
     }
 
     return(

@@ -3,7 +3,7 @@ import { ChipBucket, TTSChip } from "./ChipTypes";
 import uuid from 'react-native-uuid';
 
 const initialChipBucket: ChipBucket = {
-    chips : []
+    chips: []
 } 
 
 export const chipBucketSlice = createSlice({
@@ -18,6 +18,7 @@ export const chipBucketSlice = createSlice({
         },
         removeChip:(chipBucket,action:PayloadAction<string>)=>
         {
+            console.log("remv")
             chipBucket.chips = chipBucket?.chips.filter(item => 
                 {
                     return (item.chipID != action.payload) 

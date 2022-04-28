@@ -4,17 +4,26 @@ import { ClearChipsIcon, SpeechIcon, theme } from '../../Theme/theme';
 import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 import { Chip, colors, Image } from 'react-native-elements';
 import { color, ScreenHeight } from 'react-native-elements/dist/helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearChips, removeChip } from '../../storage/TTSChip/ChipStorage';
+import { chipBucket } from '../../storage/Store';
+import Tts from 'react-native-tts';
 
 
 export const TTS = () =>
 {
+    const dispatch = useDispatch();
+    const chips = useSelector(chipBucket)
+
     async function ReadTTS(...params:any[])
     {
-        return;
+        const sentence = chips.map(item => item.chipWord).join(' ');
+        Tts.stop()
+        Tts.speak(sentence);
     }
     async function ClearChips(...params:any[])
     {
-        return;
+        dispatch(clearChips())
     }
     return(
         <View style={styles.TTSContainer}>
@@ -33,22 +42,23 @@ export const TTS = () =>
         </TouchableHighlight>
         </View>
         <View style={styles.TTSChipsContainer}>
-            <ScrollView contentContainerStyle={styles.TTSChipsScrollView}>
-            <TTSChip/>
-
-            </ScrollView>
+        <ScrollView contentContainerStyle={styles.TTSChipsScrollView}>
+        {
+            chips.map(item => <TTSChip key = {item.chipID} chip = {item} />)
+        }
+        </ScrollView>
         </View>
         <View style={styles.TTSButton}>
         <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
-        onPress={ReadTTS}>
+        onPress={() => ClearChips()}>
         <View style={styles.TTSButtonWrapper}>    
         <Image
         style={styles.TTSButtonIcon}
         source={{uri:ClearChipsIcon}}
         />
-        <Text style = {styles.TTSButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>Temizle</Text>
+        <Text style = {styles.TTSButtonLabel} adjustsFontSizeToFit={true}  numberOfLines={1}>Temizle</Text>
         </View>
         </TouchableHighlight>
         </View>
@@ -57,30 +67,26 @@ export const TTS = () =>
 }
 
 
-const TTSChip = () => 
+const TTSChip = (props:any) => 
 {
+    const dispatch = useDispatch();
     //This requires connection to the redux storage and passing relevant shit to that
-    const rand = `Babam ile görüşmek istiyorum`.split(' ')
     return(
-        <>{
-            rand.map(item => {
-                return (
-                    <Chip
-                    title={`${item}`}
-                    type='outline'
-                    containerStyle={{marginVertical:10,marginHorizontal:5}}
-                    icon={{
-                        name:"close",
-                        type:"font-awesome",
-                        size:20,
-                        color:colors.primary
-                    }}
-                    iconRight
-                    onPress={() => console.log("CHİP")}
-                    />
-                )
-            })
-        }</>
+        <>
+        <Chip
+            title={`${props.chip.chipWord}`}
+            type='outline'
+            containerStyle={{marginVertical:10,marginHorizontal:5}}
+            icon={{
+                name:"close",
+                type:"font-awesome",
+                size:20,
+                color:colors.primary
+            }}
+            iconRight
+            onPress={() => dispatch(removeChip(props.chip.chipID))}
+         />
+        </>
     )
 }
 

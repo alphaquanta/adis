@@ -9,16 +9,17 @@ import { CardDeck } from '../../storage/Store';
 import { navigateBack } from '../../storage/Card/CardStorage';
 import { Card } from '../../storage/Card/CardTypes';
 import Sound from 'react-native-sound';
+import { addChip } from '../../storage/TTSChip/ChipStorage';
 
 export const QuickAccessButton = (props:any) => {
     const deckData = useSelector(CardDeck)
+    const dispatch = useDispatch();
+
     const bIndex = props?.buttonIndex ?? 0
-    const dispatchBack = useDispatch();
     const [audio,setAudio] = useState<Sound>();
     useEffect(()=> {
         if(deckData?.deck[bIndex]?.cardQuickButtonType == "QUICK_BUTTON_ALARM")
         {
-
             try{
                 setAudio(new Sound('alarm.wav',Sound.MAIN_BUNDLE));
                 console.log("stuff")
@@ -46,7 +47,7 @@ export const QuickAccessButton = (props:any) => {
                     return;
                 case "QUICK_BUTTON_BACK":
                     //back in stack
-                    dispatchBack(navigateBack())
+                    dispatch(navigateBack())
                     return;
                 case "QUICK_BUTTON_NO":
                 case "QUICK_BUTTON_YES":
@@ -62,8 +63,10 @@ export const QuickAccessButton = (props:any) => {
 
     async function OnLongPress(...params:any)
     {
-        Tts.stop();
-        Tts.speak(props?.Data?.cardName ?? "Kart")
+        if(deckData?.deck[bIndex]?.cardType == "QUICK_BUTTON" && ( deckData?.deck[bIndex]?.cardQuickButtonType == "QUICK_BUTTON_YES" || deckData?.deck[bIndex]?.cardQuickButtonType == "QUICK_BUTTON_NO" ))
+        {
+            dispatch(addChip(deckData?.deck[bIndex]?.cardName))
+        }
     }
 
     return(
