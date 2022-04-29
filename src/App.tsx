@@ -11,6 +11,7 @@ import { InfoBar } from './components/InfoBar/InfoBar';
 import {Provider, useSelector} from "react-redux"
 import store, { ApplicationData, UserData } from "./storage/Store"
 import Sound from 'react-native-sound';
+import { ModuleContainer } from './Theme/Container';
 
 export default function App() {
   useEffect(()=> 
@@ -54,7 +55,7 @@ export default function App() {
     <InfoBar/>
     <View style={styles.container}>
       <SideBar side ={"left"}/>
-      <NavigationContainer/>
+      <ModuleContainer/>
       <SideBar side ={"right"}/>
     </View>
     </ThemeProvider>
@@ -62,16 +63,7 @@ export default function App() {
   );
 }
 
-const NavigationContainer = () =>
-{
-  const userState = useSelector(UserData);
-  const applicationState = useSelector(ApplicationData);
-  return(
-    <>
-    {applicationState.selectedModule == "CARDS" ? <CardsModule/> : <></>}
-    </>
-  )
-}
+
 
 const styles = StyleSheet.create({
   container: {

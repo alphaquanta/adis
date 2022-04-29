@@ -3,8 +3,8 @@ import { Application, ModuleType } from "./ApplicationTypes";
 
 const initialApplication:Application = 
 {
-    "selectedModule":"CARDS",
-    "previousModule":"CARDS"
+    "selectedModule":"PAIN",
+    "previousModule":"PAIN"
 }
 export const applicationSlice = createSlice({
     name: 'ApplicationData',
@@ -17,7 +17,6 @@ export const applicationSlice = createSlice({
         },
         setSelectedApplication:(application,action:PayloadAction<ModuleType>) =>
         {
-            console.log("stuff")
             application.previousModule = application.selectedModule;
             application.selectedModule = action.payload
             return application;
