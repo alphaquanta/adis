@@ -12,10 +12,6 @@ export const InfoBar = () => {
     const userData = useSelector(UserData)
     useEffect(() => 
     {
-      //GET USER DATA HERE
-      setInterval(() => {
-        setDateTime(new Date())
-      },30000)
     },[])
     return(
       <View style={styles.InfoBarContainer}>
@@ -31,7 +27,7 @@ export const InfoBar = () => {
         flexDirection:"row",
         width:"100%",
         height:"5%",
-        backgroundColor:theme.colors?.primary,
+        backgroundColor: theme.colors?.primary,
       },
       InfoBarDataColumn:{
         width:"25%",

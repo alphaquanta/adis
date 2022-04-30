@@ -10,6 +10,7 @@ const initialUser: UserDataType =
     skillLevel: 0,
     emergencyContact: "",
     caretakerUUID: "",
+    gender:"MALE",
     isTTS:true
 } 
 

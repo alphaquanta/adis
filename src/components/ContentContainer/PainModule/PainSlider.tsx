@@ -5,12 +5,11 @@ import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 type SlidersComponentProps = {};
 
-const PainSlider: React.FunctionComponent<SlidersComponentProps> = () => {
-  const [value, setValue] = useState(0);
-  const [vertValue, setVertValue] = useState(0);
+const PainSlider   = (props:any) => {
+
 
   const interpolate = (start: number, end: number) => {
-    let k = (value - 0) / 10; // 0 =>min  && 10 => MAX
+    let k = (props.pvalue - 0) / 10; // 0 =>min  && 10 => MAX
     return Math.ceil((1 - k) * start + k * end) % 256;
   };
 
@@ -23,9 +22,12 @@ const PainSlider: React.FunctionComponent<SlidersComponentProps> = () => {
 
   return (
     <>
+    <View style ={styles.Title}>
+      <Text>ACI/AĞRI DERECESİ</Text>
+    </View>
     <Slider
-        value={value}
-        onValueChange={setValue}
+        value={props.pvalue}
+        onValueChange={props.setValue}
         maximumValue={10}
         minimumValue={0}
         step={1}
@@ -50,8 +52,8 @@ const PainSlider: React.FunctionComponent<SlidersComponentProps> = () => {
 
 const styles = StyleSheet.create({
   contentView: {
+    flex : 1,
     padding: 20,
-    width: '100%',
     justifyContent: 'center',
     alignItems: 'stretch',
   },
@@ -69,7 +71,12 @@ const styles = StyleSheet.create({
     textAlign : "center",
     paddingVertical : 5,
     marginBottom : 10
-  }
+  },    Title:
+  {
+      justifyContent:"center",
+      alignItems:"center",
+      marginBottom:10
+  },
 });
 
 export default PainSlider;

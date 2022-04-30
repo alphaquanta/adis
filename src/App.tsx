@@ -23,6 +23,7 @@ export default function App() {
     setInterval(RegularChecks,10000)
   },[])
 
+
   async function CheckAndSetTTS():Promise<Boolean> 
   {
     let isAvaiable: Boolean = false
@@ -54,9 +55,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
     <InfoBar/>
     <View style={styles.container}>
-      <SideBar side ={"left"}/>
       <ModuleContainer/>
-      <SideBar side ={"right"}/>
     </View>
     </ThemeProvider>
     </Provider>

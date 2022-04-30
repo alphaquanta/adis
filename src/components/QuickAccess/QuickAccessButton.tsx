@@ -10,6 +10,7 @@ import { navigateBack } from '../../storage/Card/CardStorage';
 import { Card } from '../../storage/Card/CardTypes';
 import Sound from 'react-native-sound';
 import { addChip } from '../../storage/TTSChip/ChipStorage';
+import { setSelectedModule } from '../../storage/Application/ApplicationStorage';
 
 export const QuickAccessButton = (props:any) => {
     const deckData = useSelector(CardDeck)
@@ -46,7 +47,6 @@ export const QuickAccessButton = (props:any) => {
                     }
                     return;
                 case "QUICK_BUTTON_BACK":
-                    //back in stack
                     dispatch(navigateBack())
                     return;
                 case "QUICK_BUTTON_NO":
@@ -55,7 +55,13 @@ export const QuickAccessButton = (props:any) => {
                     Tts.speak((deckData?.deck[bIndex])?.cardName ?? "Kart")
                     return;
                 case "QUICK_BUTTON_PAIN":
-                    //switch to pain module
+                    dispatch(setSelectedModule("PAIN"))
+                    return;
+                case "QUICK_BUTTON_CARDS":
+                    dispatch(setSelectedModule("CARDS"))
+                    return;
+                case "QUICK_BUTTON_DRAW":
+                    dispatch(setSelectedModule("DRAW"))
                     return;
             }
         }

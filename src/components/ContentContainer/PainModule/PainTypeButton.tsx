@@ -9,9 +9,8 @@ import { navigateBack, setSelectedCard } from '../../../storage/Card/CardStorage
 import { useDispatch } from 'react-redux';
 import { addChip } from '../../../storage/TTSChip/ChipStorage';
 
+export const PainTypeButton = (props:any) =>{
 
-export const CardItem = (props:any) => {
-//export type QuickButtonType = "QUICK_BUTTON_YES"|"QUICK_BUTTON_NO"|"QUICK_BUTTON_BACK"|"QUICK_BUTTON_PAIN"|"QUICK_BUTTON_ALARM"
 
     const dispatch = useDispatch()
 
@@ -42,74 +41,56 @@ export const CardItem = (props:any) => {
     }
 
     return(
-        <View style={styles.CardItemWrapper}>
         <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
         onLongPress={OnLongPress}
-        onPress={OnClick}>
-        <View 
-        style={styles.QuickButtonContentWrapper}
+        onPress={OnClick}
+        style ={styles.ButtonContainer}
         >
+        <View style={{alignContent:"center",justifyContent:"center"}}>
+        <View>
         <Image
         source={{uri:(props?.cardData as Card)?.cardData ?? PlaceHolder}}
         style={styles.ButtonImage}
         />
+        </View>
         <View style={styles.QuickButtonLabelContainer}>
-        <Text style={styles.QuickButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{(props?.cardData as Card)?.cardName}</Text>
+        <Text style={styles.QuickButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{(props?.cardData as Card)?.cardName ?? "TEST"}</Text>
         </View>
         </View>
         </TouchableHighlight>
-        </View>
+
     )
-}
+} 
 
 
-  const styles = StyleSheet.create({
-    CardItemWrapper:
-    {
-        width:vw(15),
-        height:vw(15) + 20,
-        borderColor:theme.colors?.primary,
-        borderWidth:1,
-        borderRadius:5,
-        marginVertical:25,
-        marginHorizontal:10,
-    
+const styles = StyleSheet.create({
+    ButtonContainer:{
+    height:"98%",
+    aspectRatio:1,
+    justifyContent:"center",
+    borderWidth:1,
+    borderColor:theme.colors?.primary,
+    shadowColor:"#000000",
+    shadowRadius:1,
+    shadowOpacity:0.5,
     },
-    QuickAccessButton: {
-        height:"25%",
-        aspectRatio: .9,
-        maxWidth:"90%",
-        alignSelf:"center",
-        borderWidth:1,
-        borderColor:theme.colors?.primary,
-        borderRadius:5,
-        shadowColor:"#000000",
-        shadowRadius:5,
-        shadowOpacity:0.5,
+    ButtonImage:{
+    width:"80%",
+    aspectRatio:1,
+    resizeMode:"contain",
+    marginTop:"5%",
+    alignItems:"center",
+    marginLeft:"10%"
+
     },
-    ButtonImage:
-    {
-        width:"100%",
-        aspectRatio:1,
-        resizeMode:"contain"
-    },
-    QuickButtonContentWrapper:
-    {
-        width:"100%",
-        height:"100%",
-        padding:5,
-    },
-    QuickButtonLabelContainer:
-    {
-        flexGrow:1,
+    QuickButtonLabelContainer:{
         justifyContent:"center",
         alignContent:"center",
     },
-    QuickButtonLabel:
-    {
+    QuickButtonLabel:{
         textAlign:"center",
         fontWeight:"bold",
     }
-  });
+})

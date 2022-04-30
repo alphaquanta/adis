@@ -9,4 +9,8 @@ export interface UserDataType
     emergencyContact:string;
     caretakerUUID:string;  
     isTTS:boolean;
+    gender:Gender;
 }
+
+
+export type Gender = "MALE"|"FAMALE"
