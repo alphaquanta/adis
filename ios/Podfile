@@ -14,6 +14,8 @@ target 'adis' do
 
   pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'adisTests' do
     inherit! :complete
     # Pods for testing
