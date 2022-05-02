@@ -5,7 +5,7 @@ import { Application, ApplicationStateType, ModuleType } from "./ApplicationType
 const initialApplication:Application = 
 {
     "state":"LOADING",
-    "selectedModule":"PAIN",
+    "selectedModule":"CARDS",
     "previousModule":"CARDS"
 }
 export const applicationSlice = createSlice({

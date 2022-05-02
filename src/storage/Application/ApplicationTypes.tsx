@@ -1,4 +1,4 @@
-export type ModuleType = "CARDS"|"CARDS_TTS"|"DRAW"|"PAIN"
+export type ModuleType = "CARDS"|"DRAW"|"PAIN"
 export type ApplicationStateType = "LOADING" | "LOGIN" | "READY" | "OFFLINE"
 export interface Application {
     state:ApplicationStateType;
