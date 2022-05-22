@@ -5,19 +5,23 @@ import { TTS } from '../../TTS/TTSChips';
 import { CardItem } from './CardNavItem';
 import { useSelector } from 'react-redux';
 import { ApplicationData, CardDeck, UserData } from '../../../storage/Store';
+import { KeyboardModule } from '../KeyboardModule/KeyboardContainer';
 
 
 export const CardsModule = () => {
   const deckData = useSelector(CardDeck)
   const userState = useSelector(UserData);
-
+  const applicationState = useSelector(ApplicationData)
     return(
         <View
         style={styles.MainContainer}
         >
       {userState.isTTS ? <TTS/> : <></>}
+      {applicationState.showKeyboard ? <KeyboardModule/> : <></>}
       <ScrollView contentContainerStyle = {styles.CardsContainer}>
         {
+          applicationState.showKeyboard ? 
+          <></> : 
           deckData.deck.map(card =>
             {
               if(card.cardParrent == deckData.selectedCard)

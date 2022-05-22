@@ -6,20 +6,30 @@ import { Chip, colors, Image } from 'react-native-elements';
 import { color, ScreenHeight } from 'react-native-elements/dist/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearChips, removeChip } from '../../storage/TTSChip/ChipStorage';
-import { ChipBucketData } from '../../storage/Store';
+import { ApplicationData, ChipBucketData } from '../../storage/Store';
 import Tts from 'react-native-tts';
+import { toggleKeyboard } from '../../storage/Application/ApplicationStorage';
 
 
 export const TTS = () =>
 {
     const dispatch = useDispatch();
     const chips = useSelector(ChipBucketData)
-
+    const applicationState = useSelector(ApplicationData);
+    async function showKeyboard()
+    {
+        dispatch(toggleKeyboard())
+    }
     async function ReadTTS(...params:any[])
     {
+        if(applicationState.showKeyboard == false)
+        {
         const sentence = chips.map(item => item.chipWord).join(' ');
         Tts.stop()
         Tts.speak(sentence);
+    }
+    else
+    dispatch(toggleKeyboard())
     }
     async function ClearChips(...params:any[])
     {
@@ -31,13 +41,21 @@ export const TTS = () =>
         <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
-        onPress={ReadTTS}>
+        onPress={ReadTTS}
+        onLongPress={showKeyboard}
+        >
         <View style={styles.TTSButtonWrapper}>
         <Image
         style={styles.TTSButtonIcon}
         source={{uri:SpeechIcon}}
         />
-        <Text style = {styles.TTSButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>Dinle</Text>
+        {
+        applicationState.showKeyboard ? 
+        <Text style = {styles.TTSButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>Yazmayı Bitir</Text> 
+        :
+        <Text style = {styles.TTSButtonLabel} adjustsFontSizeToFit={true} numberOfLines={1}>Dinle/Yaz</Text>
+        
+        }
         </View>
         </TouchableHighlight>
         </View>

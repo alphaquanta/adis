@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {  StyleSheet, Text, View } from 'react-native';
 import ThemeProvider from 'react-native-elements/dist/config/ThemeProvider';
 import { CardsModule } from './components/ContentContainer/CardsModule/CardsContainer';
 import { SideBar } from './components/QuickAccess/QuickAccessBar';

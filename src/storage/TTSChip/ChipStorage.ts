@@ -13,6 +13,8 @@ export const chipBucketSlice = createSlice({
     {
         addChip:(chipBucket,action:PayloadAction<string>)=>
         {
+            if(action.payload == undefined || action.payload == "" || action.payload == " " || action.payload == null)
+            return chipBucket;
             chipBucket?.chips.push({chipWord:action.payload,chipID:uuid.v4().toString()})
             return chipBucket
         },

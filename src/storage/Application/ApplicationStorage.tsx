@@ -6,7 +6,8 @@ const initialApplication:Application =
 {
     "state":"LOADING",
     "selectedModule":"CARDS",
-    "previousModule":"CARDS"
+    "previousModule":"CARDS",
+    showKeyboard:false
 }
 export const applicationSlice = createSlice({
     name: 'ApplicationData',
@@ -27,8 +28,13 @@ export const applicationSlice = createSlice({
         {
             application.state = action.payload;
             return application;
+        },
+        toggleKeyboard:(application,action?:PayloadAction<boolean|undefined>)=>
+        {
+            application.showKeyboard = action?.payload ? action.payload : !application.showKeyboard;
+            console.log(application.showKeyboard)
         }
     }
 })
 
-export const {setSelectedModule,setInitialModule,setApplicationState} = applicationSlice.actions
+export const {setSelectedModule,setInitialModule,setApplicationState,toggleKeyboard} = applicationSlice.actions

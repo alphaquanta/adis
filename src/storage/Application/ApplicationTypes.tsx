@@ -4,4 +4,5 @@ export interface Application {
     state:ApplicationStateType;
     selectedModule:ModuleType;
     previousModule:ModuleType;
+    showKeyboard:boolean;
 }

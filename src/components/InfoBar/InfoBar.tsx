@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 import { theme } from '../../Theme/theme';
 import {format} from 'date-fns'
 import tr from 'date-fns/locale/tr'
@@ -14,19 +14,20 @@ export const InfoBar = () => {
     {
     },[])
     return(
-      <View style={styles.InfoBarContainer}>
+      <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.InfoBarContainer}>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{userData.name} {userData.surname}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'EEEE',{locale:tr})}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'HH:MM',{locale:tr})}</Text></View>
       <View style={styles.InfoBarDataColumn}><Text style={styles.InfoBarDataColumnLabel} adjustsFontSizeToFit={true} numberOfLines={1}>{format(dateTime,'dd/MM/yyyy',{locale:tr})}</Text></View>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
   const styles = StyleSheet.create({
       InfoBarContainer:{
         flexDirection:"row",
         width:"100%",
-        height:"5%",
+        height:25,
         backgroundColor: theme.colors?.primary,
       },
       InfoBarDataColumn:{

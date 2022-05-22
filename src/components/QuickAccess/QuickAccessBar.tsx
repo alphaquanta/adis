@@ -36,7 +36,7 @@ export const SideBar = (props:any) => {
 const styles = StyleSheet.create({
     SideBar: {
       flex: .20,
-      height:"100%",
+      height:vh(100),
       maxWidth:250,
       flexDirection: 'column',
       justifyContent:"space-evenly",
